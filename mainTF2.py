@@ -49,6 +49,9 @@ def plot_rate( rate_his, rolling_intv = 50):
     fig, ax = plt.subplots(figsize=(15,8))
 #    rolling_intv = 20
 
+    print(np.arange(len(rate_array)))
+    print(df.rolling(rolling_intv, min_periods=1).mean())
+
     plt.plot(np.arange(len(rate_array))+1, df.rolling(rolling_intv, min_periods=1).mean(), 'b')
     plt.fill_between(np.arange(len(rate_array))+1, df.rolling(rolling_intv, min_periods=1).min()[0], df.rolling(rolling_intv, min_periods=1).max()[0], color = 'b', alpha = 0.2)
     plt.ylabel('Normalized Computation Rate')
@@ -92,7 +95,8 @@ if __name__ == "__main__":
 
 
     mem = MemoryDNN(net = [N, 120, 80, N],
-                    learning_rate = 0.01,
+                    #learning_rate = 0.01,
+                    learning_rate=0.05,
                     training_interval=10,
                     batch_size=128,
                     memory_size=Memory
